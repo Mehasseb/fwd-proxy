@@ -1,6 +1,5 @@
 # forward-proxy-icap-docker 
 
-[Source](https://github.com/k8-proxy/k8-reverse-proxy)
 
  The completed pieces of this project so far are:
 
