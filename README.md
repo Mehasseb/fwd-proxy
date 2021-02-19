@@ -3,11 +3,11 @@
 
  The completed pieces of this project so far are:
 
-- Squid based reverse Proxy for a specific website, with ICAP integration.
-1- Being Docker based.
-2- Support basic authentication static username/password.
-3- Support SSL pumping.
-4- Support ICAP integration for the related file types
+- Squid based forward Proxy for a specific website, with ICAP integration.
+- Being Docker based.
+- Support basic authentication static username/password.
+- Support SSL pumping.
+- Support ICAP integration for the related file types
 **Default configuration includes proxy for**
 
 - assets.publishing.service.gov.uk.glasswall-icap.com
