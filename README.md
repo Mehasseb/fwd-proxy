@@ -87,14 +87,14 @@ This means that any occurence of **.gov.uk** in the response should be replaced 
 
 2. Execute the following
    
-   ```bash
+   ```
  docker-compose build --no-cache
  docker-compose up
    ```
 
 3. Verify that all containers are up
    
-   ```bash
+   ```
    docker-compose ps
    ```
 4 -to enable SSL pumping 
