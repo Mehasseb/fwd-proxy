@@ -1,14 +1,14 @@
-# reverse-proxy-icap-docker (Release 2)
+# forward-proxy-icap-docker 
 
 [Source](https://github.com/k8-proxy/k8-reverse-proxy)
 
-Release 2 includes the completed/tested pieces of the Reverse Proxy project as a "reverse-proxy-icap-docker" to run inside a standard Ubuntu 18.04 (WSL and contianerized environements arent supported) server OVA image. The completed pieces of this project so far are:
+ The completed pieces of this project so far are:
 
 - Squid based reverse Proxy for a specific website, with ICAP integration.
-- Two Way URL rewrite/ with the help of NGINX in front of Squid.
-- SSL termination.
-- GW Rebuild ICAP service
-
+1- Being Docker based.
+2- Support basic authentication static username/password.
+3- Support SSL pumping.
+4- Support ICAP integration for the related file types
 **Default configuration includes proxy for**
 
 - assets.publishing.service.gov.uk.glasswall-icap.com
@@ -84,10 +84,12 @@ This means that any occurence of **.gov.uk** in the response should be replaced 
 
 ## Deployment
 
+
 2. Execute the following
    
    ```bash
-   docker-compose up -d
+ docker-compose build --no-cache
+ docker-compose up
    ```
 
 3. Verify that all containers are up
@@ -95,6 +97,25 @@ This means that any occurence of **.gov.uk** in the response should be replaced 
    ```bash
    docker-compose ps
    ```
+4 -to enable SSL pumping 
+ 
+   ```
+   bopenssl req -new -newkey rsa:2048 -days <certificate validity period in days> -nodes -x509 -keyout squidCA.pem -out squidCA.pem
+
+You will be prompted to fill in the fields of the self-signed SSL certificate.ash
+
+
+openssl x509 -in squidCA.pem -outform DER -out squid.der
+
+
+
+chown proxy:proxy squidCA.pem
+
+chmod 400 squidCA.pem
+
+   
+   ```
+
 
 ## Troubleshooting
 
