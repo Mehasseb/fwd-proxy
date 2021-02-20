@@ -1,5 +1,6 @@
 # forward-proxy-icap-docker 
 
+A forward proxy is an Internet-facing proxy used to retrieve data from a wide range of sources (in most cases anywhere on the Internet). A reverse proxy is usually an internal-facing proxy used as a front-end to control and protect access to a server on a private network.
 
  The completed pieces of this project so far are:
 
@@ -8,23 +9,8 @@
 - Support basic authentication static username/password.
 - Support SSL pumping.
 - Support ICAP integration for the related file types
-**Default configuration includes proxy for**
 
-- assets.publishing.service.gov.uk.glasswall-icap.com
-- gov.uk.glasswall-icap.com
-- www.gov.uk.glasswall-icap.com
-- Built-in GW Rebuild ICAP service, can be change by setting **ICAP_URL** in `gwproxy.env`
-- 
-## Preparation
 
-We needed to check the website requests to check domains of interest, (domains that should be proxied), which typically are:
-
-- Website main domain and www subdomain (if applicable)
-
-- Domains used in redirects between website pages (example: authentication redirections)
-
-- Domains that hosts files that should be rebuilt against Glasswall rebuild engine
-- 
 
 
 ### Finding domains of interest
