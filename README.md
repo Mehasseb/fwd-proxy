@@ -7,7 +7,7 @@ A forward proxy is an Internet-facing proxy used to retrieve data from a wide ra
 - Squid based forward Proxy for a specific website, with ICAP integration.
 - Being Docker based.
 - Support basic authentication static username/password.
-- Support SSL pumping.
+- Support SSL pumping. (Broken)
 - Support ICAP integration for the related file types
 
 
