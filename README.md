@@ -28,11 +28,12 @@ You will have to logout and relogin from your machine before deploying the solut
 
 ## Preparing source code
 
-0. Clone repository
+1. Clone repository
 
 ```bash
 git clone --recursive https://github.com/Helmy1998/fwd-proxy
 
+   ```
 ## Deployment
 
 2. Execute the following
