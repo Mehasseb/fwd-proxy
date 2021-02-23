@@ -31,12 +31,12 @@ You will have to logout and relogin from your machine before deploying the solut
 1. Clone repository
 
 ```bash
-git clone --recursive https://github.com/Helmy1998/fwd-proxy
+git clone --recursive https://github.com/k8-proxy/fwd-proxy
 
    ```
 ## Deployment
 
-2. Execute the following
+. Execute the following
    
    ```bash
    docker-compose build --no-cache
@@ -47,7 +47,24 @@ git clone --recursive https://github.com/Helmy1998/fwd-proxy
    ```bash
    docker-compose ps
    ```
-   
+. To enable user authentication
+execute the following commands
+```bash
+   sudo apt-get install apache2-utils
+   htpasswd -c <path of squid users file on squid directory> <username>
+   "you will be asked to enter the password for the user"
+   chown squid <path of squid users files on squid directory>
+   ```
+   Add the following to squid.conf file
+      ```bash
+   auth_param basic program /usr/lib64/squid/basic_ncsa_auth <ath of squid users file on squid directory>
+auth_param basic children 5
+auth_param basic realm Proxy Authentication Required
+auth_param basic credentialsttl 2 hours
+auth_param basic casesensitive off
+ ``` 
+ ```
+
    ## Troubleshooting
 
 - Check if docker service is active
