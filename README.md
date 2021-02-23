@@ -31,12 +31,12 @@ You will have to logout and relogin from your machine before deploying the solut
 1. Clone repository
 
 ```bash
-git clone --recursive https://github.com/Helmy1998/fwd-proxy
+git clone --recursive https://github.com/k8-proxy/fwd-proxy
 
    ```
 ## Deployment
 
-2. Execute the following
+. Execute the following
    
    ```bash
    docker-compose build --no-cache
@@ -47,7 +47,61 @@ git clone --recursive https://github.com/Helmy1998/fwd-proxy
    ```bash
    docker-compose ps
    ```
+- To enable user authentication
+execute the following commands
+```bash
+   sudo apt-get install apache2-utils
+   htpasswd -c <path of squid users file on squid directory> <username>
+   "you will be asked to enter the password for the user"
+   chown squid <path of squid users files on squid directory>
+  
+   Add the following to squid.conf file
    
+   auth_param basic program /usr/lib64/squid/basic_ncsa_auth <path of squid users file on squid directory>
+   auth_param basic children 5
+   auth_param basic realm Proxy Authentication Required
+   auth_param basic credentialsttl 2 hours
+   auth_param basic casesensitive off
+ ```
+   for more details check the following link  https://kifarunix.com/how-to-setup-squid-proxy-basic-authentication-with-username-and-password/ 
+   
+   -To enable SSL pumping 
+   Go to Squid folder and execute the following Commands
+   
+   ```bash
+  openssl req -new -newkey rsa:2048 -days <certificate validity period in days> -nodes -x509 -keyout squidCA.pem -out squidCA.pem
+  
+"You will be prompted to fill in the fields of the self-signed SSL certificate"
+
+openssl x509 -in squidCA.pem -outform DER -out squid.der
+  ```
+  
+  Import the squid.der file into the browsers of local computer users.
+The method used to import the squid.der file into a browser depends on the type of browser.
+ ```bash
+  chmod 400 squidCA.pem
+  mkdir -p /var/lib/squid
+
+/usr/lib/squid/ssl_crtd -c -s /var/lib/squid/ssl_db
+
+chown -R proxy:proxy /var/lib/squid
+Replace http_port 3128 with http_port 3128 ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB cert=/etc/squid/squidCA.pem.
+  ```
+Add the following lines to the end of the file:
+```bash
+sslcrtd_program /usr/lib/squid/ssl_crtd -s /var/lib/squid/ssl_db -M 4MB
+
+sslcrtd_children 5
+
+ssl_bump server-first all
+
+sslproxy_cert_error deny all
+
+  ```
+
+
+  for more details you can check https://support.kaspersky.com/KWTS/6.0/en-US/166244.htm
+
    ## Troubleshooting
 
 - Check if docker service is active
@@ -70,5 +124,5 @@ git clone --recursive https://github.com/Helmy1998/fwd-proxy
   Go to setting>proxy>manualproxy
   Add IP Adress of your machine and port 3128 then pree ok and restart your browser
   ![auth](https://user-images.githubusercontent.com/75560486/108697290-57057e80-750b-11eb-8d68-ad7756c685b5.PNG)
-  You will be asked to enter a username and password use helmy as a username and 123 as password once you pass authentication you will be able to use the web browser
+  You will be asked to enter a username and password once you pass authentication you will be able to use the web browser
 
