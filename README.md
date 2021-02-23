@@ -47,7 +47,7 @@ git clone --recursive https://github.com/k8-proxy/fwd-proxy
    ```bash
    docker-compose ps
    ```
-. To enable user authentication
+- To enable user authentication
 execute the following commands
 ```bash
    sudo apt-get install apache2-utils
@@ -63,7 +63,19 @@ execute the following commands
    auth_param basic credentialsttl 2 hours
    auth_param basic casesensitive off
  ```
+   for more details check the following link  https://kifarunix.com/how-to-setup-squid-proxy-basic-authentication-with-username-and-password/ 
+   
+   -To enable SSL pumping 
+   Go to Squid folder and execute the following Commands
+   
+   ```bash
+  openssl req -new -newkey rsa:2048 -days <certificate validity period in days> -nodes -x509 -keyout squidCA.pem -out squidCA.pem
+  
+"You will be prompted to fill in the fields of the self-signed SSL certificate"
 
+openssl x509 -in squidCA.pem -outform DER -out squid.der
+  ```
+  for more details you can check https://support.kaspersky.com/KWTS/6.0/en-US/166244.htm
 
    ## Troubleshooting
 
