@@ -57,7 +57,7 @@ execute the following commands
   
    Add the following to squid.conf file
    
-   auth_param basic program /usr/lib64/squid/basic_ncsa_auth <ath of squid users file on squid directory>
+   auth_param basic program /usr/lib64/squid/basic_ncsa_auth <path of squid users file on squid directory>
    auth_param basic children 5
    auth_param basic realm Proxy Authentication Required
    auth_param basic credentialsttl 2 hours
@@ -75,6 +75,31 @@ execute the following commands
 
 openssl x509 -in squidCA.pem -outform DER -out squid.der
   ```
+  
+  Import the squid.der file into the browsers of local computer users.
+The method used to import the squid.der file into a browser depends on the type of browser.
+ ```bash
+  chmod 400 squidCA.pem
+  mkdir -p /var/lib/squid
+
+/usr/lib/squid/ssl_crtd -c -s /var/lib/squid/ssl_db
+
+chown -R proxy:proxy /var/lib/squid
+Replace http_port 3128 with http_port 3128 ssl-bump generate-host-certificates=on dynamic_cert_mem_cache_size=4MB cert=/etc/squid/squidCA.pem.
+  ```
+Add the following lines to the end of the file:
+```bash
+sslcrtd_program /usr/lib/squid/ssl_crtd -s /var/lib/squid/ssl_db -M 4MB
+
+sslcrtd_children 5
+
+ssl_bump server-first all
+
+sslproxy_cert_error deny all
+
+  ```
+
+
   for more details you can check https://support.kaspersky.com/KWTS/6.0/en-US/166244.htm
 
    ## Troubleshooting
