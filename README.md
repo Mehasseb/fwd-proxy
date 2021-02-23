@@ -54,7 +54,7 @@ execute the following commands
    htpasswd -c <path of squid users file on squid directory> <username>
    "you will be asked to enter the password for the user"
    chown squid <path of squid users files on squid directory>
-   ```
+  
    Add the following to squid.conf file
    
    auth_param basic program /usr/lib64/squid/basic_ncsa_auth <ath of squid users file on squid directory>
@@ -62,7 +62,7 @@ execute the following commands
    auth_param basic realm Proxy Authentication Required
    auth_param basic credentialsttl 2 hours
    auth_param basic casesensitive off
-
+ ```
 
 
    ## Troubleshooting
