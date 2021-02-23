@@ -63,7 +63,7 @@ auth_param basic realm Proxy Authentication Required
 auth_param basic credentialsttl 2 hours
 auth_param basic casesensitive off
  ``` 
- ```
+
 
    ## Troubleshooting
 
