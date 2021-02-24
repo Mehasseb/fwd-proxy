@@ -124,5 +124,5 @@ sslproxy_cert_error deny all
   Go to setting>proxy>manualproxy
   Add IP Adress of your machine and port 3128 then pree ok and restart your browser
   ![auth](https://user-images.githubusercontent.com/75560486/108697290-57057e80-750b-11eb-8d68-ad7756c685b5.PNG)
-  You will be asked to enter a username and password once you pass authentication you will be able to use the web browser
+  You will be asked to enter a username and password once you pass authentication you will be able to use the web browser.
 
